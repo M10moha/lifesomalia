@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Careers - LIFE Somalia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/favicon.ico">
+  <style>
+    /* Make body a flex container to push footer to bottom */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Main content grows to fill space */
+    main {
+      flex: 1;
+    }
+
+    /* Footer styling */
+    .footer {
+      background-color: green; /* Set footer background to green */
+      color: white;            /* Makes text readable */
+      padding: 20px 0;         /* Adds spacing */
+      text-align: center;      /* Centers text */
+    }
+      
+    .header {
+      background-color: #fff;
+      padding: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      height: 0px;
+    }
+  
+    .logo {
+      height: 45px !important; /* smaller logo */
+    }
+    .header-inner {
+  display: flex;
+  justify-content: space-between; /* logo left, nav right */
+  align-items: center;            /* vertically center */
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 10px; /* optional spacing between logo and text */
+}
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo-wrap">
+        <img src="images/logo.png" class="logo" alt="logo">
+        <span class="site-title"></span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programs.html">Our Work</a>
+        <a href="projects.html">Projects</a>
+        <a href="where.html">Where We Work</a>
+        <a href="donate.html" class="cta-donate">Donate</a>
+        <a href="hiring.html">Join Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="menu-toggle">☰</div>
+    </div>
+  </header>
+
+  <main class="section container">
+    <h1>Careers & Volunteering</h1>
+    <p class="lead-muted">Join our team — paid roles, internships and volunteers welcome.</p>
+    <div class="form">
+      <form action="mailto:info@lifesomalia.org" method="post" enctype="text/plain">
+        <label>Full name
+          <input type="text" name="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Role
+          <select name="role">
+            <option>Staff</option>
+            <option>Volunteer</option>
+            <option>Intern</option>
+          </select>
+        </label>
+        <label>Message
+          <textarea name="message"></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">Apply</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>&copy; 2025 LIFE Somalia • info@lifesomalia.org</small>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

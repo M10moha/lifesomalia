@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Programs - LIFE Somalia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/favicon.ico">
+  <!-- Added Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Added custom styles for icons -->
+  <style>
+    .program-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      padding: 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+      
+    .header {
+  background-color: #fff;
+  padding: 10px 0;       /* reduce vertical padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  height: auto;          /* allow it to grow naturally */
+  height: 0px;
+
+}
+
+    
+    .logo {
+      height: 35px !important; /* smaller logo */
+      size: 2cap;
+    }
+    .program-icon:hover {
+      background-color: #f5f5f5;
+      transform: translateY(-5px);
+    }
+    
+    .program-icon i {
+      font-size: 48px;
+      margin-bottom: 15px;
+      color: #2cb848; /* Adjust color as needed */
+    }
+    
+    .program-icon span {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* Grid layout: 2 icons per row, centered */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 per row */
+      gap: 40px;
+      justify-items: center;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo-wrap">
+        <img src="images/logo.png" class="logo" alt="logo">
+        <span class="site-title"></span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programs.html" class="active">Our Work</a>
+        <a href="projects.html">Projects</a>
+        <a href="where.html">Where We Work</a>
+        <a href="donate.html" class="cta-donate">Donate</a>
+        <a href="hiring.html">Join Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="menu-toggle">☰</div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="section container">
+    <h1>Programs & Thematic Areas</h1>
+    <p class="lead-muted">
+      Click an icon to learn more about our programs and thematic areas.
+    </p>
+
+    <div class="grid programs-grid">
+      <a href="gender.html" class="program-icon">
+        <i class="fas fa-venus-mars"></i>
+        <span>Gender</span>
+      </a>
+
+      <a href="wash.html" class="program-icon">
+        <i class="fas fa-tint"></i>
+        <span>WASH</span>
+      </a>
+
+      <a href="health.html" class="program-icon">
+        <i class="fas fa-heartbeat"></i>
+        <span>Health</span>
+      </a>
+
+      <a href="education.html" class="program-icon">
+        <i class="fas fa-graduation-cap"></i>
+        <span>Education</span>
+      </a>
+
+      <a href="nutrition.html" class="program-icon">
+        <i class="fas fa-apple-alt"></i>
+        <span>Nutrition</span>
+      </a>
+
+      <a href="protection.html" class="program-icon">
+        <i class="fas fa-shield-alt"></i>
+        <span>Protection</span>
+      </a>
+
+      <a href="environment.html" class="program-icon">
+        <i class="fas fa-leaf"></i>
+        <span>Environment</span>
+      </a>
+
+      <a href="food.html" class="program-icon">
+        <i class="fas fa-utensils"></i>
+        <span>Food Security</span>
+      </a>
+    </div>
+  </main>
+  <style>
+footer.footer {
+    background-color: rgb(58, 220, 26);
+    color: rgb(230, 235, 227);
+}
+</style>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <small>&copy; 2025 LIFE Somalia • info@lifesomalia.org</small>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

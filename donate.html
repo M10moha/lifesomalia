@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Donate - LIFE Somalia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent-mpesa: #34b233;
+      --accent-visa: #1a1f71;
+      --bg: #ffffff;
+      --text: #111;
+      --muted: #666;
+      --card-shadow: 0 6px 18px rgba(17,17,17,0.06);
+    }
+
+    html,body{height:100%;margin:0;font-family:Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);}
+    .page {display:flex;flex-direction:column;min-height:100vh;}
+    header{padding:14px 20px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:18px;}
+    .logo{height:40px}
+    .site-title{font-weight:700;font-family:Poppins,Roboto;margin-right:auto}
+    .nav a{margin-left:14px;color:var(--muted);text-decoration:none;font-weight:500}
+    main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+    .card{width:100%;max-width:760px;background:#fff;border-radius:12px;box-shadow:var(--card-shadow);padding:28px}
+    h1{margin:0 0 8px;font-family:Poppins}
+    p.lead{margin:0 0 20px;color:var(--muted)}
+    .options{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:8px;border:0;cursor:pointer;font-weight:700;text-decoration:none;color:#fff;
+      box-shadow:0 6px 14px rgba(0,0,0,0.06);transition:transform .12s ease,box-shadow .12s;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.mpesa{background:var(--accent-mpesa)}
+    .btn.visa{background:var(--accent-visa)}
+    .btn.secondary{
+      background:#f5f5f5;color:var(--text);font-weight:600;border:1px solid #e6e6e6;
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:0.95rem}
+    .center{text-align:center}
+    .mt-10{margin-top:10px}
+    .row{display:flex;gap:12px;align-items:center}
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+    .modal{background:#fff;max-width:520px;width:100%;border-radius:10px;padding:20px;box-shadow:0 12px 30px rgba(0,0,0,0.2)}
+    .modal h3{margin-top:0}
+    .field{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+    input[type="number"]{padding:10px;border-radius:8px;border:1px solid #ddd;font-size:1rem}
+    .modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+
+    /* responsive */
+    @media (max-width:640px){
+      .options{flex-direction:column;}
+      .nav{display:none}
+    }
+
+    /* footer */
+    footer{background:green;color:#fff;text-align:center;padding:14px 8px;font-weight:600}
+    .small{font-size:0.92rem}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <img src="images/logo.png" alt="logo" class="logo" />
+      <div class="site-title">LIFE Somalia</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programs.html">Our Work</a>
+        <a href="donate.html" style="font-weight:700">Donate</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="card">
+        <h1>Support LIFE Somalia</h1>
+        <p class="lead">Choose a payment method below. Enter the amount in the next step.</p>
+
+        <div class="options">
+          <!-- M-Pesa -->
+          <button class="btn mpesa" id="openMpesa">
+            <!-- simple icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2L20 7v6c0 5-4 9-8 9s-8-4-8-9V7l8-5z" fill="#fff"/></svg>
+            Donate via M‑Pesa
+          </button>
+
+          <!-- Visa -->
+          <button class="btn visa" id="openVisa">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><rect width="18" height="12" x="3" y="6" rx="2" fill="#fff"/></svg>
+            Donate via Visa / Card
+          </button>
+        </div>
+
+        <p class="mt-10 muted">Tip: For Mpesa, go to send money 0115295035</p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="small">&copy; 2025 LIFE Somalia • info@lifesomalia.org</div>
+    </footer>
+  </div>
+
+  <!-- Modal backdrop -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document" aria-modal="true">
+      <div id="modalContent">
+        <!-- dynamic content injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuration: your M-Pesa paybill/till number and label
+    const MPESA_NUMBER = '0115295035'; // the number you gave
+    const MPESA_LABEL = 'LIFE Somalia Donation'; // shown to donor
+
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalContent = document.getElementById('modalContent');
+
+    function openModal(html){
+      modalContent.innerHTML = html;
+      modalBackdrop.style.display = 'flex';
+      modalBackdrop.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal(){
+      modalBackdrop.style.display = 'none';
+      modalBackdrop.setAttribute('aria-hidden', 'true');
+      modalContent.innerHTML = '';
+    }
+
+    // MPESA flow: ask amount, then show instructions and actions
+    document.getElementById('openMpesa').addEventListener('click', () => {
+      openModal(`
+        <h3>Donate via M‑Pesa</h3>
+        <p class="muted">Enter the amount you wish to donate (KES).</p>
+        <div class="field">
+          <label>Amount</label>
+          <input id="donationAmount" type="number" min="1" value="100" />
+        </div>
+        <div class="field">
+          <label>Reference (optional)</label>
+          <input id="donationRef" type="text" placeholder="Your name or 'Donation'" />
+        </div>
+        <div class="actions">
+          <button class="btn secondary" id="cancelMpesa">Cancel</button>
+          <button class="btn mpesa" id="proceedMpesa">Proceed</button>
+        </div>
+      `);
+
+      document.getElementById('cancelMpesa').addEventListener('click', closeModal);
+      document.getElementById('proceedMpesa').addEventListener('click', () => {
+        const amount = Number(document.getElementById('donationAmount').value) || 0;
+        const ref = (document.getElementById('donationRef').value || 'Donation').trim();
+
+        if (amount <= 0) {
+          alert('Please enter a valid amount.');
+          return;
+        }
+
+        // Show next modal with clear instructions + handy buttons
+        openModal(`
+          <h3>Complete your M‑Pesa Payment</h3>
+          <p class="muted">Please follow the steps below on your phone:</p>
+          <ol>
+            <li>Open your M‑Pesa / Lipa na M‑Pesa menu on your phone.</li>
+            <li>Select <strong>Paybill</strong>.</li>
+            <li>Enter Business No / Paybill: <strong id="mpesaNum">${MPESA_NUMBER}</strong></li>
+            <li>Account: <strong id="mpesaAcc">${ref}</strong></li>
+            <li>Amount: <strong id="mpesaAmount">${amount.toLocaleString()}</strong></li>
+            <li>Enter your M‑Pesa PIN to confirm.</li>
+          </ol>
+
+          <p class="muted">After confirming on your phone, the payment will be processed. If you need help, contact info@lifesomalia.org.</p>
+
+          <div class="actions">
+            <button class="btn secondary" id="backEdit">Edit</button>
+            <button class="btn secondary" id="copyInfo">Copy payment details</button>
+            <button class="btn mpesa" id="openDialer">Open dialer (mobile)</button>
+          </div>
+        `);
+
+        // wire up new buttons
+        document.getElementById('backEdit').addEventListener('click', () => {
+          // go back to amount entry
+          document.getElementById('donationAmount').value = amount;
+          document.getElementById('donationRef').value = ref;
+          // simulate back by reopening initial amount modal
+          openModal(`
+            <h3>Donate via M‑Pesa</h3>
+            <p class="muted">Enter the amount you wish to donate (KES).</p>
+            <div class="field">
+              <label>Amount</label>
+              <input id="donationAmount" type="number" min="1" value="${amount}" />
+            </div>
+            <div class="field">
+              <label>Reference (optional)</label>
+              <input id="donationRef" type="text" value="${ref}" />
+            </div>
+            <div class="actions">
+              <button class="btn secondary" id="cancelMpesa">Cancel</button>
+              <button class="btn mpesa" id="proceedMpesa">Proceed</button>
+            </div>
+          `);
+          document.getElementById('cancelMpesa').addEventListener('click', closeModal);
+          document.getElementById('proceedMpesa').addEventListener('click', () => {
+            // recursively call click handler - simple approach: reload page to reset or re-open flow
+            location.reload();
+          });
+        });
+
+        document.getElementById('copyInfo').addEventListener('click', () => {
+          const text = `Paybill: ${MPESA_NUMBER}\nAccount: ${ref}\nAmount: ${amount}`;
+          navigator.clipboard?.writeText(text).then(() => {
+            alert('Payment details copied to clipboard. Paste in your M-Pesa app or a note.');
+          }).catch(() => {
+            alert('Unable to copy automatically. Please manually copy:\n\n' + text);
